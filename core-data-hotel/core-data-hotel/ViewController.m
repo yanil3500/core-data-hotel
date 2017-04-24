@@ -14,6 +14,15 @@
 
 @implementation ViewController
 
+
+-(void)loadView{
+    [super loadView];
+    
+    //Changes background of viewController
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
