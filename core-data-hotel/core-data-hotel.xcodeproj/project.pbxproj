@@ -13,6 +13,7 @@
 		CD8ABA481EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA461EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld */; };
 		CD8ABA4A1EAE5FC200C5E846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD8ABA491EAE5FC200C5E846 /* Assets.xcassets */; };
 		CD8ABA4D1EAE5FC200C5E846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8ABA4B1EAE5FC200C5E846 /* LaunchScreen.storyboard */; };
+		CD8ABA561EAE6D3900C5E846 /* AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA551EAE6D3900C5E846 /* AutoLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		CD8ABA491EAE5FC200C5E846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD8ABA4C1EAE5FC200C5E846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD8ABA4E1EAE5FC200C5E846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD8ABA541EAE6D3900C5E846 /* AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayout.h; sourceTree = "<group>"; };
+		CD8ABA551EAE6D3900C5E846 /* AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,7 @@
 				CD8ABA3E1EAE5FC100C5E846 /* AppDelegate.m */,
 				CD8ABA401EAE5FC100C5E846 /* ViewController.h */,
 				CD8ABA411EAE5FC100C5E846 /* ViewController.m */,
+				CD8ABA571EAE6D4800C5E846 /* model */,
 				CD8ABA491EAE5FC200C5E846 /* Assets.xcassets */,
 				CD8ABA4B1EAE5FC200C5E846 /* LaunchScreen.storyboard */,
 				CD8ABA4E1EAE5FC200C5E846 /* Info.plist */,
@@ -77,6 +81,15 @@
 				CD8ABA3B1EAE5FC100C5E846 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD8ABA571EAE6D4800C5E846 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				CD8ABA541EAE6D3900C5E846 /* AutoLayout.h */,
+				CD8ABA551EAE6D3900C5E846 /* AutoLayout.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +167,7 @@
 				CD8ABA481EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld in Sources */,
 				CD8ABA3F1EAE5FC100C5E846 /* AppDelegate.m in Sources */,
 				CD8ABA3C1EAE5FC100C5E846 /* main.m in Sources */,
+				CD8ABA561EAE6D3900C5E846 /* AutoLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
