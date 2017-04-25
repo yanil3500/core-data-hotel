@@ -28,7 +28,7 @@
                                                                              options:0
                                                                              metrics: nil
                                                                                views:viewDictionary];
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[view]|"
                                                                              options:0
                                                                              metrics: nil
                                                                                views:viewDictionary];
@@ -86,10 +86,20 @@
     
 }
 
-+(NSLayoutConstraint *)trailingConstraintFrom:(UIView *)view toView:(UIView *)otherView{
++(NSLayoutConstraint *)trailingConstraintFromView:(UIView *)view
+                                       toView:(UIView *)otherView{
     return [AutoLayout genericConstraintFrom:view toView:otherView withAttribute:NSLayoutAttributeTrailing];
 }
 
++(NSLayoutConstraint *)topConstraintFromView:(UIView *)view
+                                  toView:(UIView *)otherView {
+    return [AutoLayout genericConstraintFrom:view toView:otherView withAttribute:NSLayoutAttributeTop];
+}
+
++(NSLayoutConstraint *)bottomConstraintFromView:(UIView *)view
+                                     toView:(UIView *)otherView{
+    return [AutoLayout genericConstraintFrom:view toView:otherView withAttribute:NSLayoutAttributeBottom];
+}
 
 
 

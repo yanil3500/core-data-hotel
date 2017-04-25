@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "ViewControlla.h"
 
 #import "Hotel+CoreDataClass.h"
 #import "Hotel+CoreDataProperties.h"
@@ -18,7 +18,7 @@
 @interface AppDelegate ()
 
 @property(strong, nonatomic) UINavigationController *navController;
-@property(strong, nonatomic) ViewController *viewController;
+@property(strong, nonatomic) ViewControlla *viewControlla;
 
 @end
 
@@ -36,9 +36,9 @@
 -(void)setupRootViewController{
     self.window = [[UIWindow alloc]initWithFrame: [[UIScreen mainScreen] bounds]];
     
-    self.viewController = [[ViewController alloc]init];
+    self.viewControlla = [[ViewControlla alloc]init];
     
-    self.navController = [[UINavigationController alloc]initWithRootViewController:self.viewController];
+    self.navController = [[UINavigationController alloc]initWithRootViewController:self.viewControlla];
     
     self.window.rootViewController = self.navController;
     
@@ -109,10 +109,11 @@
             newHotel.stars = (NSInteger)hotel[@"stars"];
             for (NSDictionary *room in hotel[@"rooms"]) {
                 Room *newRoom = [NSEntityDescription insertNewObjectForEntityForName:@"Room" inManagedObjectContext:self.persistentContainer.viewContext];
-                
-                newRoom.roomNumber = (NSInteger)room[@"number"];
+                NSNumber *number = room[@"number"];
+                newRoom.roomNumber = [number integerValue];
                 newRoom.beds = (NSInteger)room[@"beds"];
-                newRoom.rate = (NSInteger)room[@"rate"];
+                NSNumber *roomRate = room[@"rate"];
+                newRoom.rate = [roomRate floatValue];
                 
                 newRoom.hotel = newHotel;
             }

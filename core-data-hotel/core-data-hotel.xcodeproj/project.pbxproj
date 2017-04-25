@@ -15,6 +15,8 @@
 		CD8ABA4D1EAE5FC200C5E846 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8ABA4B1EAE5FC200C5E846 /* LaunchScreen.storyboard */; };
 		CD8ABA561EAE6D3900C5E846 /* AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA551EAE6D3900C5E846 /* AutoLayout.m */; };
 		CDBA68561EAE95A8003026EC /* hotels.json in Resources */ = {isa = PBXBuildFile; fileRef = CDBA68531EAE95A8003026EC /* hotels.json */; };
+		CDBA685B1EAEA488003026EC /* HotelsViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA685A1EAEA488003026EC /* HotelsViewControlla.m */; };
+		CDBA68611EAED425003026EC /* RoomsViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA68601EAED425003026EC /* RoomsViewControlla.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,10 @@
 		CD8ABA541EAE6D3900C5E846 /* AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayout.h; sourceTree = "<group>"; };
 		CD8ABA551EAE6D3900C5E846 /* AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayout.m; sourceTree = "<group>"; };
 		CDBA68531EAE95A8003026EC /* hotels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hotels.json; sourceTree = "<group>"; };
+		CDBA68591EAEA488003026EC /* HotelsViewControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelsViewControlla.h; sourceTree = "<group>"; };
+		CDBA685A1EAEA488003026EC /* HotelsViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelsViewControlla.m; sourceTree = "<group>"; };
+		CDBA685F1EAED425003026EC /* RoomsViewControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomsViewControlla.h; sourceTree = "<group>"; };
+		CDBA68601EAED425003026EC /* RoomsViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomsViewControlla.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,7 @@
 		CD8ABA391EAE5FC100C5E846 /* core-data-hotel */ = {
 			isa = PBXGroup;
 			children = (
+				CDBA68621EAED433003026EC /* controlla */,
 				CD8ABA3D1EAE5FC100C5E846 /* AppDelegate.h */,
 				CD8ABA3E1EAE5FC100C5E846 /* AppDelegate.m */,
 				CDBA68581EAE9DBF003026EC /* view */,
@@ -97,10 +104,21 @@
 		CDBA68581EAE9DBF003026EC /* view */ = {
 			isa = PBXGroup;
 			children = (
-				CD8ABA401EAE5FC100C5E846 /* ViewControlla.h */,
-				CD8ABA411EAE5FC100C5E846 /* ViewControlla.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		CDBA68621EAED433003026EC /* controlla */ = {
+			isa = PBXGroup;
+			children = (
+				CD8ABA401EAE5FC100C5E846 /* ViewControlla.h */,
+				CD8ABA411EAE5FC100C5E846 /* ViewControlla.m */,
+				CDBA685F1EAED425003026EC /* RoomsViewControlla.h */,
+				CDBA68601EAED425003026EC /* RoomsViewControlla.m */,
+				CDBA68591EAEA488003026EC /* HotelsViewControlla.h */,
+				CDBA685A1EAEA488003026EC /* HotelsViewControlla.m */,
+			);
+			name = controlla;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,10 +193,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDBA68611EAED425003026EC /* RoomsViewControlla.m in Sources */,
 				CD8ABA421EAE5FC100C5E846 /* ViewControlla.m in Sources */,
 				CD8ABA481EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld in Sources */,
 				CD8ABA3F1EAE5FC100C5E846 /* AppDelegate.m in Sources */,
 				CD8ABA3C1EAE5FC100C5E846 /* main.m in Sources */,
+				CDBA685B1EAEA488003026EC /* HotelsViewControlla.m in Sources */,
 				CD8ABA561EAE6D3900C5E846 /* AutoLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
