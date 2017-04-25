@@ -43,7 +43,7 @@
 -(void)loadView{
     [super loadView];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 300) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height) style:UITableViewStylePlain];
     
 }
 
@@ -51,11 +51,10 @@
 -(NSArray *)allHotels{
     if(!_allHotels){
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [[appDelegate persistentContainer] viewContext];
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hotel"];
         
         NSError *fetchError;
-        NSArray *hotels = [context executeFetchRequest:request error: &fetchError];
+        NSArray *hotels = [[[appDelegate persistentContainer] viewContext]  executeFetchRequest:request error: &fetchError];
         
         if (fetchError){
             NSLog(@"Failed to fetch hotels from Core Data");
@@ -65,6 +64,8 @@
     }
     return _allHotels;
 }
+
+#pragma mark UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section {
@@ -78,15 +79,15 @@
     
     return cell;
 }
+
+
+#pragma mark UITableViewDataDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"Selected row: %li", (long)indexPath.row);
+    
     RoomsViewControlla *roomsViewControlla = [[RoomsViewControlla alloc] init];
     
-    NSArray *rooms = [[self.allHotels[indexPath.row] rooms] allObjects];
-    
-    NSLog(@"Number of rooms: %lu",(unsigned long)rooms.count);
-    
-    [roomsViewControlla setAllRooms: rooms];
+    [roomsViewControlla setAllRooms: [[self.allHotels[indexPath.row] rooms] allObjects]];
     
     [[self navigationController] pushViewController:roomsViewControlla animated:YES];
 }

@@ -19,6 +19,19 @@
 
 @implementation RoomsViewControlla
 
+#pragma mark Setter and Getter
+
+-(void)setAllRooms:(NSArray *)rooms{
+    _allRooms = rooms;
+}
+
+-(NSArray *)allRooms {
+    return _allRooms;
+}
+
+
+
+
 - (void)viewDidLoad {
     self.navigationController.topViewController.title = @"Rooms";
     [super viewDidLoad];
@@ -29,15 +42,19 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     [self.view addSubview: self.tableView];
+    [[self tableView] setRowHeight:(CGFloat)100];
 }
 
 
 -(void)loadView{
     [super loadView];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 300) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height) style:UITableViewStylePlain];
     
 }
+
+
+#pragma mark UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.allRooms.count;
@@ -46,26 +63,20 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    ;
-    NSString *roomNumber = [[NSString alloc] initWithFormat:@"Room Number: %hd\n", [self.allRooms[indexPath.row] roomNumber]];
-    NSString *numberOfBeds = [[NSString alloc]initWithFormat:@"Number of Beds: %hd\n", [self.allRooms[indexPath.row] beds]];
-    NSString *roomRate = [[NSString alloc] initWithFormat:@"Room rate: $%.02f\n", [self.allRooms[indexPath.row] rate]];
-    NSLog(@"%@",numberOfBeds);
-    NSLog(@"%@", roomNumber);
-    NSLog(@"%@",roomRate);
-    cell.textLabel.text = (@"%@",roomNumber);
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    NSString *roomNumber = [[NSString alloc] initWithFormat:@"Room Number: %hd", [self.allRooms[indexPath.row] roomNumber]];
+    NSString *numberOfBeds = [[NSString alloc]initWithFormat:@"\nNumber of Beds: %hd", [self.allRooms[indexPath.row] beds]];
+    [roomNumber stringByAppendingString:numberOfBeds];
+    NSString *roomRate = [[NSString alloc] initWithFormat:@"\nRoom rate: $%.02f", [self.allRooms[indexPath.row] rate]];
+    [roomNumber stringByAppendingString:roomRate];
+    cell.textLabel.text = roomNumber;
     
     
     return cell;
 }
 
--(void)setAllRooms:(NSArray *)rooms{
-    _allRooms = rooms;
-}
-
--(NSArray *)allRooms {
-    return _allRooms;
-}
 
 
 @end
