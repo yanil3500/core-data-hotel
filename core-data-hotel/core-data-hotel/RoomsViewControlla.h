@@ -22,7 +22,6 @@
 
 -(void)setAllRooms:(NSArray *)rooms;
 
--(NSArray *)allRooms;
 
 
 @end

@@ -27,14 +27,14 @@
 
 -(void)loadView{
     [super loadView];
-    [self setupDoneButton];
-    [self setupDatePickers];
+    [self setUpDoneButton];
+    [self setUpDatePickers];
     [[self view] setBackgroundColor:[UIColor whiteColor]];
 }
 
 #pragma mark UIDatePicker helper methods
 
--(void)setupDatePickers {
+-(void)setUpDatePickers {
     self.startDate = [[UIDatePicker alloc]init];
     self.endDate = [[UIDatePicker alloc] init];
     
@@ -59,7 +59,7 @@
     [[self navigationController] pushViewController:availabilityViewControlla animated:YES];
 }
 
--(void)setupDoneButton{
+-(void)setUpDoneButton{
     UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
     [[self navigationItem] setRightBarButtonItem:done];
 }

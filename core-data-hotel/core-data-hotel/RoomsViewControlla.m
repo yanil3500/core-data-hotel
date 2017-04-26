@@ -5,7 +5,7 @@
 //  Created by Elyanil Liranzo Castro on 4/24/17.
 //  Copyright © 2017 Elyanil Liranzo Castro. All rights reserved.
 //
-
+#import "AutoLayout.h"
 #import "RoomsViewControlla.h"
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
@@ -25,32 +25,16 @@
     _allRooms = rooms;
 }
 
--(NSArray *)allRooms {
-    return _allRooms;
-}
-
-
-
-
 - (void)viewDidLoad {
-    self.navigationController.topViewController.title = @"Rooms";
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.dataSource = self;
-    // Do any additional setup after loading the view.
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    [self.view addSubview: self.tableView];
-    [[self tableView] setRowHeight:(CGFloat)100];
 }
 
 
 -(void)loadView{
     [super loadView];
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height) style:UITableViewStylePlain];
-    
+    self.navigationController.topViewController.title = @"Rooms";
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self setUpTableView];
 }
 
 
@@ -77,6 +61,20 @@
     return cell;
 }
 
+#pragma mark UITableView helper methods
+-(void) setUpTableView {
+    
+    self.tableView = [[UITableView alloc]init];
+    [self.view addSubview:self.tableView];
+    
+    [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    self.tableView.dataSource = self;
+}
 
 
 @end

@@ -102,6 +102,13 @@
     return [AutoLayout genericConstraintFrom:view toView:otherView withAttribute:NSLayoutAttributeBottom];
 }
 
++(NSLayoutConstraint *)heightConstraintFromView:(UIView *)view
+                                          toView:(UIView *)otherView{
+    return [AutoLayout genericConstraintFrom:view toView:otherView withAttribute:NSLayoutAttributeHeight];
+}
+
+
+
 +(NSArray *)constraintsWithVFLForViewDictionary:(NSDictionary *)viewDictionary
                            forMetricsDictionary:(NSDictionary *)metricsDictionary
                                     withOptions:(NSLayoutFormatOptions)options

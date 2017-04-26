@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CD0F8B531EAFBC7800691701 /* DatePickerViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B521EAFBC7800691701 /* DatePickerViewControlla.m */; };
 		CD0F8B561EAFCF8100691701 /* AvailabilityViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B551EAFCF8100691701 /* AvailabilityViewControlla.m */; };
+		CD0F8B591EB0063100691701 /* BookViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B581EB0063100691701 /* BookViewControlla.m */; };
+		CD0F8B5C1EB007DD00691701 /* AvailabilityViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B5B1EB007DD00691701 /* AvailabilityViewCell.m */; };
 		CD8ABA3C1EAE5FC100C5E846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA3B1EAE5FC100C5E846 /* main.m */; };
 		CD8ABA3F1EAE5FC100C5E846 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA3E1EAE5FC100C5E846 /* AppDelegate.m */; };
 		CD8ABA421EAE5FC100C5E846 /* ViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA411EAE5FC100C5E846 /* ViewControlla.m */; };
@@ -26,6 +28,10 @@
 		CD0F8B521EAFBC7800691701 /* DatePickerViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewControlla.m; sourceTree = "<group>"; };
 		CD0F8B541EAFCF8100691701 /* AvailabilityViewControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewControlla.h; sourceTree = "<group>"; };
 		CD0F8B551EAFCF8100691701 /* AvailabilityViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityViewControlla.m; sourceTree = "<group>"; };
+		CD0F8B571EB0063100691701 /* BookViewControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewControlla.h; sourceTree = "<group>"; };
+		CD0F8B581EB0063100691701 /* BookViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewControlla.m; sourceTree = "<group>"; };
+		CD0F8B5A1EB007DD00691701 /* AvailabilityViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewCell.h; sourceTree = "<group>"; };
+		CD0F8B5B1EB007DD00691701 /* AvailabilityViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityViewCell.m; sourceTree = "<group>"; };
 		CD8ABA371EAE5FC100C5E846 /* core-data-hotel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "core-data-hotel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8ABA3B1EAE5FC100C5E846 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CD8ABA3D1EAE5FC100C5E846 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,6 +116,8 @@
 		CDBA68581EAE9DBF003026EC /* view */ = {
 			isa = PBXGroup;
 			children = (
+				CD0F8B5A1EB007DD00691701 /* AvailabilityViewCell.h */,
+				CD0F8B5B1EB007DD00691701 /* AvailabilityViewCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -123,6 +131,8 @@
 				CD0F8B521EAFBC7800691701 /* DatePickerViewControlla.m */,
 				CD0F8B541EAFCF8100691701 /* AvailabilityViewControlla.h */,
 				CD0F8B551EAFCF8100691701 /* AvailabilityViewControlla.m */,
+				CD0F8B571EB0063100691701 /* BookViewControlla.h */,
+				CD0F8B581EB0063100691701 /* BookViewControlla.m */,
 				CDBA685F1EAED425003026EC /* RoomsViewControlla.h */,
 				CDBA68601EAED425003026EC /* RoomsViewControlla.m */,
 				CDBA68591EAEA488003026EC /* HotelsViewControlla.h */,
@@ -205,6 +215,8 @@
 			files = (
 				CDBA68611EAED425003026EC /* RoomsViewControlla.m in Sources */,
 				CD0F8B531EAFBC7800691701 /* DatePickerViewControlla.m in Sources */,
+				CD0F8B5C1EB007DD00691701 /* AvailabilityViewCell.m in Sources */,
+				CD0F8B591EB0063100691701 /* BookViewControlla.m in Sources */,
 				CD8ABA421EAE5FC100C5E846 /* ViewControlla.m in Sources */,
 				CD8ABA481EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld in Sources */,
 				CD8ABA3F1EAE5FC100C5E846 /* AppDelegate.m in Sources */,
