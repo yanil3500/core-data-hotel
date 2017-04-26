@@ -22,7 +22,8 @@
 //    NSDictionary *metricDictionary = @{@"padding" : padding, @"multiplier" : paddingMultiplier};
     
     
-
+    [AutoLayout helperSetTranslatesAutoResizingMaskIntoConstraints:view];
+    
     
     NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
                                                                              options:0
@@ -90,6 +91,18 @@
 +(NSLayoutConstraint *)trailingConstraintFromView:(UIView *)view
                                        toView:(UIView *)otherView{
     return [AutoLayout genericConstraintFrom:view toView:otherView withAttribute:NSLayoutAttributeTrailing];
+}
+
++(void)helperSetTranslatesAutoResizingMaskIntoConstraints:(UIView *)view{
+    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+}
+
++(NSArray *)leadingConstraintAndTrailingConstraintFromView:(UIView *)view
+toView:(UIView *)otherView{
+    
+    [AutoLayout helperSetTranslatesAutoResizingMaskIntoConstraints:view];
+    return @[[AutoLayout leadingConstraintFromView:view toView:otherView],
+             [AutoLayout trailingConstraintFromView:view toView:otherView]];
 }
 
 +(NSLayoutConstraint *)topConstraintFromView:(UIView *)view

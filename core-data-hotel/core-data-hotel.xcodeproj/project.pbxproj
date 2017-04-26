@@ -23,6 +23,16 @@
 		CDBA68611EAED425003026EC /* RoomsViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA68601EAED425003026EC /* RoomsViewControlla.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CDF454A71EB111CD00585320 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD8ABA2F1EAE5FC100C5E846 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD8ABA361EAE5FC100C5E846;
+			remoteInfo = "core-data-hotel";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		CD0F8B511EAFBC7800691701 /* DatePickerViewControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewControlla.h; sourceTree = "<group>"; };
 		CD0F8B521EAFBC7800691701 /* DatePickerViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewControlla.m; sourceTree = "<group>"; };
@@ -49,10 +59,19 @@
 		CDBA685A1EAEA488003026EC /* HotelsViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelsViewControlla.m; sourceTree = "<group>"; };
 		CDBA685F1EAED425003026EC /* RoomsViewControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomsViewControlla.h; sourceTree = "<group>"; };
 		CDBA68601EAED425003026EC /* RoomsViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomsViewControlla.m; sourceTree = "<group>"; };
+		CDF454A21EB111CD00585320 /* core-data-hotelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "core-data-hotelTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDF454A61EB111CD00585320 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CD8ABA341EAE5FC100C5E846 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF4549F1EB111CD00585320 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -66,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8ABA391EAE5FC100C5E846 /* core-data-hotel */,
+				CDF454A31EB111CD00585320 /* core-data-hotelTests */,
 				CD8ABA381EAE5FC100C5E846 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8ABA371EAE5FC100C5E846 /* core-data-hotel.app */,
+				CDF454A21EB111CD00585320 /* core-data-hotelTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +162,14 @@
 			name = controlla;
 			sourceTree = "<group>";
 		};
+		CDF454A31EB111CD00585320 /* core-data-hotelTests */ = {
+			isa = PBXGroup;
+			children = (
+				CDF454A61EB111CD00585320 /* Info.plist */,
+			);
+			path = "core-data-hotelTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,6 +190,24 @@
 			productReference = CD8ABA371EAE5FC100C5E846 /* core-data-hotel.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CDF454A11EB111CD00585320 /* core-data-hotelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDF454AB1EB111CD00585320 /* Build configuration list for PBXNativeTarget "core-data-hotelTests" */;
+			buildPhases = (
+				CDF4549E1EB111CD00585320 /* Sources */,
+				CDF4549F1EB111CD00585320 /* Frameworks */,
+				CDF454A01EB111CD00585320 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDF454A81EB111CD00585320 /* PBXTargetDependency */,
+			);
+			name = "core-data-hotelTests";
+			productName = "core-data-hotelTests";
+			productReference = CDF454A21EB111CD00585320 /* core-data-hotelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -174,6 +221,12 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 6EJN6WTQBM;
 						ProvisioningStyle = Automatic;
+					};
+					CDF454A11EB111CD00585320 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 6EJN6WTQBM;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CD8ABA361EAE5FC100C5E846;
 					};
 				};
 			};
@@ -191,6 +244,7 @@
 			projectRoot = "";
 			targets = (
 				CD8ABA361EAE5FC100C5E846 /* core-data-hotel */,
+				CDF454A11EB111CD00585320 /* core-data-hotelTests */,
 			);
 		};
 /* End PBXProject section */
@@ -203,6 +257,13 @@
 				CD8ABA4D1EAE5FC200C5E846 /* LaunchScreen.storyboard in Resources */,
 				CDBA68561EAE95A8003026EC /* hotels.json in Resources */,
 				CD8ABA4A1EAE5FC200C5E846 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDF454A01EB111CD00585320 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +288,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDF4549E1EB111CD00585320 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDF454A81EB111CD00585320 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD8ABA361EAE5FC100C5E846 /* core-data-hotel */;
+			targetProxy = CDF454A71EB111CD00585320 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CD8ABA4B1EAE5FC200C5E846 /* LaunchScreen.storyboard */ = {
@@ -357,6 +433,32 @@
 			};
 			name = Release;
 		};
+		CDF454A91EB111CD00585320 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 6EJN6WTQBM;
+				INFOPLIST_FILE = "core-data-hotelTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elyaniliranzocastro.core-data-hotelTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/core-data-hotel.app/core-data-hotel";
+			};
+			name = Debug;
+		};
+		CDF454AA1EB111CD00585320 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 6EJN6WTQBM;
+				INFOPLIST_FILE = "core-data-hotelTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elyaniliranzocastro.core-data-hotelTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/core-data-hotel.app/core-data-hotel";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -377,6 +479,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		CDF454AB1EB111CD00585320 /* Build configuration list for PBXNativeTarget "core-data-hotelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDF454A91EB111CD00585320 /* Debug */,
+				CDF454AA1EB111CD00585320 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

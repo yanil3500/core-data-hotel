@@ -112,7 +112,6 @@
     
     [self.tableView registerClass:[AvailabilityViewCell class] forCellReuseIdentifier:@"cell"];
     
-    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self.tableView setEstimatedRowHeight:50.0];
     

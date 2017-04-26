@@ -103,7 +103,7 @@
     if (saveError){
         NSLog(@"Failed to save to Core Data.");
     } else {
-        NSLog(@"Successfully saved to Core Data.");
+        NSLog(@"Successfully saved reservation to Core Data.");
         [[self navigationController] popToRootViewControllerAnimated:YES];
     }
     
@@ -122,6 +122,7 @@
     if ([[[self firstName] text] isEqualToString:@""]) {
         [[self firstName]setPlaceholder:@"Required."];
     } else {
+        NSLog(@"The reservation is being made.");
         [self makeGuest];
     }
 }
