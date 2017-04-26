@@ -11,5 +11,7 @@
 @interface ViewControlla : UIViewController
 
 
+-(UIButton *)createButtonWithTitle:(NSString *)title;
+
 @end
 

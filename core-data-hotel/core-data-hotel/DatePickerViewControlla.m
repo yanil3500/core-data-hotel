@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.topViewController.title = @"Reservations";
+    self.navigationController.topViewController.title = @"Start/End Date";
     // Do any additional setup after loading the view.
 }
 

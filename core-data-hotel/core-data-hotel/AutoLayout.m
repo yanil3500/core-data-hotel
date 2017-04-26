@@ -16,10 +16,6 @@
     
     NSDictionary *viewDictionary = @{ @"view" : view };
     
-//If you have specific metrics for constraints, pass a dictionary of constraints to constraintsWithVisualFormat method
-//    NSNumber *padding = @10.0;
-//    NSNumber *paddingMultiplier = @5.0;
-//    NSDictionary *metricDictionary = @{@"padding" : padding, @"multiplier" : paddingMultiplier};
     
     
     [AutoLayout helperSetTranslatesAutoResizingMaskIntoConstraints:view];
@@ -29,7 +25,7 @@
                                                                              options:0
                                                                              metrics: nil
                                                                                views:viewDictionary];
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[view]|"
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
                                                                              options:0
                                                                              metrics: nil
                                                                                views:viewDictionary];
