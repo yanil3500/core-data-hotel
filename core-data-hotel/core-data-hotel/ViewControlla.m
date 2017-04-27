@@ -12,6 +12,8 @@
 #import "DatePickerViewControlla.h"
 #import "LookUpReservationsControlla.h"
 
+@import Crashlytics;
+
 @interface ViewControlla ()
 
 @end
@@ -33,6 +35,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setupLayout];
+    
 }
 
 -(void)setupLayout{
@@ -74,19 +77,21 @@
 
 -(void)browseButtonSelected {
     HotelsViewControlla *hotelViewControlla = [[HotelsViewControlla alloc] init];
-    [[self navigationController] pushViewController:hotelViewControlla animated:YES];
     
-    NSLog(@"Work on this for lab.");
+    [Answers logCustomEventWithName:@"Browse button tapped." customAttributes:nil];
+    [[self navigationController] pushViewController:hotelViewControlla animated:YES];
 }
 
 -(void)bookButtonSelected{
     DatePickerViewControlla *datePickerViewControlla = [[DatePickerViewControlla alloc]init];
+          [Answers logCustomEventWithName:@"Book button tapped." customAttributes:nil];
     [[self navigationController] pushViewController:datePickerViewControlla animated:YES];
     NSLog(@"bookButton selected");
 }
 
 -(void)lookUpButtonPressed{
     LookUpReservationsControlla *lookUpReservationsControlla = [[LookUpReservationsControlla alloc]init];
+     [Answers logCustomEventWithName:@"Lookup button tapped." customAttributes:nil];
     [[self navigationController] pushViewController:lookUpReservationsControlla animated:YES];
     NSLog(@"lookUpButton selected");
 }

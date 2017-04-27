@@ -16,7 +16,7 @@
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
 
-#import "AvailabilityViewCell.h"
+#import "CustomCell.h"
 
 #import "BookViewControlla.h"
 
@@ -68,6 +68,7 @@
         NSSortDescriptor *roomSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"hotel.name" ascending:YES];
         
         NSSortDescriptor *roomNumberSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"roomNumber" ascending:YES];
+        
         [roomRequest setSortDescriptors:@[roomSortDescriptor, roomNumberSortDescriptor]];
         NSError *availableRoomError;
         
@@ -85,7 +86,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    AvailabilityViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    Room *currentRoom = [[Room alloc]init];
+    
+    currentRoom = [self.availableRooms objectAtIndexPath:indexPath];
+    
+    NSLog(@"Number of beds %i",[currentRoom beds]);
+    
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     NSString *roomInformation = [[NSString alloc]initWithFormat:@"Room Number: %hd",[[self.availableRooms objectAtIndexPath:indexPath] roomNumber]];
     [[cell labelOne] setText:roomInformation];
     NSString *numberOfBeds = [[NSString alloc]initWithFormat:@"Number of beds: %i",[[self.availableRooms objectAtIndexPath:indexPath] beds]];
@@ -131,7 +138,7 @@
     
     [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
     
-    [self.tableView registerClass:[AvailabilityViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CustomCell class] forCellReuseIdentifier:@"cell"];
     
     [self.tableView setEstimatedRowHeight:50.0];
     

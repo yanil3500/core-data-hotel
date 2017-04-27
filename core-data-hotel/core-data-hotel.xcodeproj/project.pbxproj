@@ -10,7 +10,7 @@
 		CD0F8B531EAFBC7800691701 /* DatePickerViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B521EAFBC7800691701 /* DatePickerViewControlla.m */; };
 		CD0F8B561EAFCF8100691701 /* AvailabilityViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B551EAFCF8100691701 /* AvailabilityViewControlla.m */; };
 		CD0F8B591EB0063100691701 /* BookViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B581EB0063100691701 /* BookViewControlla.m */; };
-		CD0F8B5C1EB007DD00691701 /* AvailabilityViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B5B1EB007DD00691701 /* AvailabilityViewCell.m */; };
+		CD0F8B5C1EB007DD00691701 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0F8B5B1EB007DD00691701 /* CustomCell.m */; };
 		CD8ABA3C1EAE5FC100C5E846 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA3B1EAE5FC100C5E846 /* main.m */; };
 		CD8ABA3F1EAE5FC100C5E846 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA3E1EAE5FC100C5E846 /* AppDelegate.m */; };
 		CD8ABA421EAE5FC100C5E846 /* ViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8ABA411EAE5FC100C5E846 /* ViewControlla.m */; };
@@ -23,6 +23,9 @@
 		CDBA68611EAED425003026EC /* RoomsViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA68601EAED425003026EC /* RoomsViewControlla.m */; };
 		CDF454AD1EB1144E00585320 /* AutoLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454AC1EB1144E00585320 /* AutoLayoutTests.m */; };
 		CDF454B01EB157E500585320 /* LookUpReservationsControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454AF1EB157E500585320 /* LookUpReservationsControlla.m */; };
+		CDF454B61EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = CDF454B51EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel */; };
+		CDF454BB1EB26E7300585320 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF454B91EB26E7300585320 /* Fabric.framework */; };
+		CDF454BC1EB26E7400585320 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF454BA1EB26E7300585320 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +45,8 @@
 		CD0F8B551EAFCF8100691701 /* AvailabilityViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityViewControlla.m; sourceTree = "<group>"; };
 		CD0F8B571EB0063100691701 /* BookViewControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewControlla.h; sourceTree = "<group>"; };
 		CD0F8B581EB0063100691701 /* BookViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewControlla.m; sourceTree = "<group>"; };
-		CD0F8B5A1EB007DD00691701 /* AvailabilityViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailabilityViewCell.h; sourceTree = "<group>"; };
-		CD0F8B5B1EB007DD00691701 /* AvailabilityViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailabilityViewCell.m; sourceTree = "<group>"; };
+		CD0F8B5A1EB007DD00691701 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		CD0F8B5B1EB007DD00691701 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		CD8ABA371EAE5FC100C5E846 /* core-data-hotel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "core-data-hotel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD8ABA3B1EAE5FC100C5E846 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CD8ABA3D1EAE5FC100C5E846 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -66,6 +69,10 @@
 		CDF454AC1EB1144E00585320 /* AutoLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutTests.m; sourceTree = "<group>"; };
 		CDF454AE1EB157E500585320 /* LookUpReservationsControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookUpReservationsControlla.h; sourceTree = "<group>"; };
 		CDF454AF1EB157E500585320 /* LookUpReservationsControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookUpReservationsControlla.m; sourceTree = "<group>"; };
+		CDF454B41EB25D4400585320 /* core_data_hotel1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = core_data_hotel1.1.xcdatamodel; sourceTree = "<group>"; };
+		CDF454B51EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "mappingModel1.0-1.1.xcmappingmodel"; sourceTree = "<group>"; };
+		CDF454B91EB26E7300585320 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		CDF454BA1EB26E7300585320 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF454BC1EB26E7400585320 /* Crashlytics.framework in Frameworks */,
+				CDF454BB1EB26E7300585320 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +101,8 @@
 				CD8ABA391EAE5FC100C5E846 /* core-data-hotel */,
 				CDF454A31EB111CD00585320 /* core-data-hotelTests */,
 				CD8ABA381EAE5FC100C5E846 /* Products */,
+				CDF454B91EB26E7300585320 /* Fabric.framework */,
+				CDF454BA1EB26E7300585320 /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +127,7 @@
 				CD8ABA4B1EAE5FC200C5E846 /* LaunchScreen.storyboard */,
 				CD8ABA4E1EAE5FC200C5E846 /* Info.plist */,
 				CD8ABA461EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld */,
+				CDF454B51EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel */,
 				CD8ABA3A1EAE5FC100C5E846 /* Supporting Files */,
 			);
 			path = "core-data-hotel";
@@ -142,8 +154,8 @@
 		CDBA68581EAE9DBF003026EC /* view */ = {
 			isa = PBXGroup;
 			children = (
-				CD0F8B5A1EB007DD00691701 /* AvailabilityViewCell.h */,
-				CD0F8B5B1EB007DD00691701 /* AvailabilityViewCell.m */,
+				CD0F8B5A1EB007DD00691701 /* CustomCell.h */,
+				CD0F8B5B1EB007DD00691701 /* CustomCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -188,6 +200,7 @@
 				CD8ABA331EAE5FC100C5E846 /* Sources */,
 				CD8ABA341EAE5FC100C5E846 /* Frameworks */,
 				CD8ABA351EAE5FC100C5E846 /* Resources */,
+				CDF454B81EB26E4B00585320 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -277,6 +290,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CDF454B81EB26E4B00585320 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 0dd5d83c3bc705a3d681347be9c46ee7566d5134 fd1876c3d418825e88af0ab8b04558bbcb789998384b421982db54623e6e9d46";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CD8ABA331EAE5FC100C5E846 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -284,7 +313,7 @@
 			files = (
 				CDBA68611EAED425003026EC /* RoomsViewControlla.m in Sources */,
 				CD0F8B531EAFBC7800691701 /* DatePickerViewControlla.m in Sources */,
-				CD0F8B5C1EB007DD00691701 /* AvailabilityViewCell.m in Sources */,
+				CD0F8B5C1EB007DD00691701 /* CustomCell.m in Sources */,
 				CD0F8B591EB0063100691701 /* BookViewControlla.m in Sources */,
 				CD8ABA421EAE5FC100C5E846 /* ViewControlla.m in Sources */,
 				CD8ABA481EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld in Sources */,
@@ -292,6 +321,7 @@
 				CD0F8B561EAFCF8100691701 /* AvailabilityViewControlla.m in Sources */,
 				CD8ABA3C1EAE5FC100C5E846 /* main.m in Sources */,
 				CDF454B01EB157E500585320 /* LookUpReservationsControlla.m in Sources */,
+				CDF454B61EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel in Sources */,
 				CDBA685B1EAEA488003026EC /* HotelsViewControlla.m in Sources */,
 				CD8ABA561EAE6D3900C5E846 /* AutoLayout.m in Sources */,
 			);
@@ -424,6 +454,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6EJN6WTQBM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "core-data-hotel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elyaniliranzocastro.core-data-hotel";
@@ -436,6 +470,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6EJN6WTQBM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "core-data-hotel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elyaniliranzocastro.core-data-hotel";
@@ -504,9 +542,10 @@
 		CD8ABA461EAE5FC100C5E846 /* core_data_hotel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				CDF454B41EB25D4400585320 /* core_data_hotel1.1.xcdatamodel */,
 				CD8ABA471EAE5FC100C5E846 /* core_data_hotel.xcdatamodel */,
 			);
-			currentVersion = CD8ABA471EAE5FC100C5E846 /* core_data_hotel.xcdatamodel */;
+			currentVersion = CDF454B41EB25D4400585320 /* core_data_hotel1.1.xcdatamodel */;
 			path = core_data_hotel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

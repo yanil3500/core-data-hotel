@@ -16,7 +16,7 @@
 
 #import "Guest+CoreDataClass.h"
 #import "Guest+CoreDataProperties.h"
-#import "AvailabilityViewCell.h"
+#import "CustomCell.h"
 
 @interface LookUpReservationsControlla () <UITableViewDataSource, UISearchBarDelegate>
 @property (strong, nonatomic)UITableView *tableView;
@@ -48,7 +48,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"Inside of allReservations: ");
-    AvailabilityViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     if(self.filteredResults != nil){
         Reservation *reservation = [[self filteredResults] objectAtIndex:indexPath.row];
@@ -129,7 +129,7 @@
     
     [self.view addSubview:[self tableView]];
     
-    [self.tableView registerClass: [AvailabilityViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass: [CustomCell class] forCellReuseIdentifier:@"cell"];
     
     [self.tableView setEstimatedRowHeight:50.0];
     

@@ -15,6 +15,10 @@
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
+
 @interface AppDelegate ()
 
 @property(strong, nonatomic) UINavigationController *navController;
@@ -27,6 +31,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Fabric with:@[[Crashlytics class]]];
+    
+//    [CrashlyticsKit crash];
+    
     [self setupRootViewController];
     [self bootStrapApp];
     return YES;
@@ -111,7 +119,7 @@
                 Room *newRoom = [NSEntityDescription insertNewObjectForEntityForName:@"Room" inManagedObjectContext:self.persistentContainer.viewContext];
                 NSNumber *number = room[@"number"];
                 newRoom.roomNumber = [number integerValue];
-                newRoom.beds = (NSInteger)room[@"beds"];
+                newRoom.beds = [(NSNumber *)room[@"beds"] intValue];
                 NSNumber *roomRate = room[@"rate"];
                 newRoom.rate = [roomRate floatValue];
                 

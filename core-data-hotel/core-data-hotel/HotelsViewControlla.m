@@ -15,6 +15,7 @@
 #import "Hotel+CoreDataProperties.h"
 
 #import "AutoLayout.h"
+#import "CustomCell.h"
 @interface HotelsViewControlla () <UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) NSArray *allHotels;
@@ -59,12 +60,18 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section {
+    
+    NSLog(@"Number of hotels: %lu",(unsigned long)self.allHotels.count);
     return self.allHotels.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = [self.allHotels[indexPath.row] name];
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    [[cell labelOne] setText:[[NSString alloc]initWithString:[[[self allHotels] objectAtIndex:indexPath.row] name]]];
+    [[cell labelOne] setFont:[UIFont boldSystemFontOfSize:16]];
+    
+    [[cell labelTwo] setText:[[NSString alloc]initWithFormat:@"Number of beds: %lu",[[[[self allHotels] objectAtIndex:indexPath.row] rooms] count]]];
+    
     
     
     return cell;
@@ -91,9 +98,11 @@
     
     [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CustomCell class] forCellReuseIdentifier:@"cell"];
     
-    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.tableView setEstimatedRowHeight:50.0];
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
