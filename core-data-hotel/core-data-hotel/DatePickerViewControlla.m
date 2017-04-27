@@ -40,6 +40,12 @@
     self.startDate = [[UIDatePicker alloc]init];
     self.endDate = [[UIDatePicker alloc] init];
     
+    [[self startDate]  addTarget:self action:@selector(changesInDatePicker:) forControlEvents:UIControlEventValueChanged];
+    [[self endDate]  addTarget:self action:@selector(changesInDatePicker:) forControlEvents:UIControlEventValueChanged];
+    
+    [[self startDate] sendActionsForControlEvents:UIControlEventValueChanged];
+    [[self endDate] sendActionsForControlEvents:UIControlEventValueChanged];
+    
     [[self view] addSubview:self.startDate];
     [[self view] addSubview:self.endDate];
     
@@ -54,6 +60,17 @@
     [self autoLayoutForDatePicker];
     
 }
+
+-(void)changesInDatePicker:(id)date{
+    //if startDate is later than endDate
+    if([[[self startDate] date]compare:([[self endDate]date])] == NSOrderedDescending){
+        [[self endDate]setDate:([NSDate date])];
+        [[self startDate] setDate:[NSDate date]];
+    }
+    NSLog(@"What is the start date?: %@",[self getDateString:[[self startDate] date]]);
+    NSLog(@"What is the end date?: %@",[self getDateString:[[self endDate] date]]);
+}
+
 -(void)setUpDatePickerLabel{
     self.startDateLabel = [[UILabel alloc] init];
     self.endDateLabel = [[UILabel alloc]init];
@@ -69,11 +86,20 @@
     
 }
 -(void)doneButtonPressed{
-    NSLog(@"doneButtonPressed");
     AvailabilityViewControlla *availabilityViewControlla = [[AvailabilityViewControlla alloc] init];
+    //if the startDate is later than endDate, switch dates
+    if([[[self startDate] date]compare:([[self endDate]date])] == NSOrderedDescending){
+        NSDate *tempDate = [[self endDate] date];
+        [[self endDate]setDate:([[self startDate] date])];
+        [[self startDate] setDate:tempDate];
+        [availabilityViewControlla setEndDate: self.endDate.date];
+        [availabilityViewControlla setStartDate: self.startDate.date];
+    }
+    NSLog(@"doneButtonPressed");
     [availabilityViewControlla setEndDate: self.endDate.date];
     [availabilityViewControlla setStartDate: self.startDate.date];
     [[self navigationController] pushViewController:availabilityViewControlla animated:YES];
+    
 }
 
 -(void)setUpDoneButton{
@@ -109,6 +135,11 @@
     
 }
 
+-(NSString *)getDateString:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    return [dateFormatter stringFromDate:date];
+}
 
 
 @end

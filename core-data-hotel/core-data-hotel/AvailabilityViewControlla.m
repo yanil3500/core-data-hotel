@@ -71,8 +71,6 @@
         [roomRequest setSortDescriptors:@[roomSortDescriptor, roomNumberSortDescriptor]];
         NSError *availableRoomError;
         
-//        _availableRooms = [[[appDelegate persistentContainer] viewContext] executeFetchRequest:roomRequest error:&availableRoomError];
-        
         _availableRooms = [[NSFetchedResultsController alloc] initWithFetchRequest:roomRequest managedObjectContext:appDelegate.persistentContainer.viewContext sectionNameKeyPath:@"hotel.name" cacheName:nil];
         
         [_availableRooms performFetch: &availableRoomError];
@@ -89,11 +87,11 @@
     
     AvailabilityViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     NSString *roomInformation = [[NSString alloc]initWithFormat:@"Room Number: %hd",[[self.availableRooms objectAtIndexPath:indexPath] roomNumber]];
-    [[cell roomNumberForCell] setText:roomInformation];
+    [[cell labelOne] setText:roomInformation];
     NSString *numberOfBeds = [[NSString alloc]initWithFormat:@"Number of beds: %i",[[self.availableRooms objectAtIndexPath:indexPath] beds]];
-    [[cell numberOfBedsForCell] setText:numberOfBeds];
+    [[cell labelTwo] setText:numberOfBeds];
     NSString *costOfRoom = [[NSString alloc]initWithFormat:@"Rate: $%.02f a night",[[self.availableRooms objectAtIndexPath:indexPath] rate]];
-    [[cell roomRateForCell] setText:costOfRoom];
+    [[cell labelThree] setText:costOfRoom];
     
     return cell;
     
@@ -143,6 +141,7 @@
     
     self.tableView.delegate = self;
 }
+
 
 
 

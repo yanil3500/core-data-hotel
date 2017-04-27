@@ -21,22 +21,22 @@
     // Configure the view for the selected state
 }
 
--(UILabel *)roomNumberForCell {
-    return _roomNumberForCell;
+-(UILabel *)labelOne {
+    return _labelOne;
 }
 
--(UILabel *)numberOfBedsForCell {
-    return _numberOfBedsForCell;
+-(UILabel *)labelTwo {
+    return _labelTwo;
 }
 
--(UILabel *)roomRateForCell{
-    return _roomRateForCell;
+-(UILabel *)labelThree{
+    return _labelThree;
 }
 
 -(void)initializeLabels {
-    self.roomRateForCell = [[UILabel alloc] init];
-    self.roomNumberForCell = [[UILabel alloc] init];
-    self.numberOfBedsForCell = [[UILabel alloc] init];
+    self.labelOne = [[UILabel alloc] init];
+    self.labelTwo = [[UILabel alloc] init];
+    self.labelThree = [[UILabel alloc] init];
 }
 
 
@@ -47,36 +47,36 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
 
-        UILabel *roomNumber = [self roomNumberForCell];
-        [roomNumber setTextColor:[UIColor blackColor]];
-        [roomNumber setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0f]];
-        [roomNumber setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addSubview:roomNumber];
+        UILabel *labelOne = [self labelOne];
+        [labelOne setTextColor:[UIColor blackColor]];
+        [labelOne setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0f]];
+        [labelOne setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.contentView addSubview:labelOne];
         
         
         
-        UILabel *roomRate = [self roomRateForCell];
-        [roomRate setTextColor:[UIColor blackColor]];
-        [roomRate setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0f]];
-        [roomRate setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addSubview:roomRate];
+        UILabel *labelTwo = [self labelTwo];
+        [labelTwo setTextColor:[UIColor blackColor]];
+        [labelTwo setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0f]];
+        [labelTwo setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.contentView addSubview:labelTwo];
         
-        UILabel *numberOfBeds = [self numberOfBedsForCell];;
-        [numberOfBeds setTextColor:[UIColor blackColor]];
-        [numberOfBeds setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0f]];
-        [numberOfBeds setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addSubview:numberOfBeds];
+        UILabel *labelThree = [self labelThree];;
+        [labelThree setTextColor:[UIColor blackColor]];
+        [labelThree setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0f]];
+        [labelThree setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.contentView addSubview:labelThree];
         
-        NSDictionary *views = @{@"roomNumber": roomNumber, @"roomRate": roomRate, @"numberOfBeds":numberOfBeds};
-        NSArray *horizontalConstraintOne = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[roomNumber]|"
+        NSDictionary *views = @{@"labelOne": labelOne, @"labelTwo": labelTwo, @"labelThree":labelThree};
+        NSArray *horizontalConstraintOne = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[labelOne]|"
                                                                                           options: 0
                                                                                           metrics:nil
                                                                                             views:views];
-        NSArray *horizontalConstraintTwo = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[roomRate]|"
+        NSArray *horizontalConstraintTwo = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[labelTwo]|"
                                                                                    options: 0
                                                                                    metrics:nil
                                                                                      views:views];
-        NSArray *horizontalConstraintThree = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[numberOfBeds]|"
+        NSArray *horizontalConstraintThree = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[labelThree]|"
                                                                                      options: 0
                                                                                      metrics:nil
                                                                                        views:views];
@@ -90,7 +90,7 @@
         [self.contentView addConstraints:horizontalConstraintThree];
         
         
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[roomNumber]-[roomRate]-[numberOfBeds]-20-|"
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[labelOne]-[labelTwo]-[labelThree]-20-|"
                                                                   options: 0
                                                                   metrics:nil
                                                                     views:views];
