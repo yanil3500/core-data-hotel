@@ -9,14 +9,12 @@
 #import "LookUpReservationsControlla.h"
 #import "AutoLayout.h"
 
-#import "AppDelegate.h"
-
 #import "Reservation+CoreDataClass.h"
 #import "Reservation+CoreDataProperties.h"
 
-#import "Guest+CoreDataClass.h"
-#import "Guest+CoreDataProperties.h"
 #import "CustomCell.h"
+
+#import "HotelService.h"
 
 @interface LookUpReservationsControlla () <UITableViewDataSource, UISearchBarDelegate>
 @property (strong, nonatomic)UITableView *tableView;
@@ -36,7 +34,6 @@
 -(void)loadView{
     
     [super loadView];
-    [self allReservations];
     self.navigationController.topViewController.title = @"Reservations";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setUpSearchBar];
@@ -53,13 +50,13 @@
     if(self.filteredResults != nil){
         Reservation *reservation = [[self filteredResults] objectAtIndex:indexPath.row];
         cell.labelOne.text = [[[[NSString alloc] initWithFormat:@"Guest Name: %@",reservation.guest.firstName] stringByAppendingString:@" "] stringByAppendingFormat:@"%@",reservation.guest.lastName];
-        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[self getDateString:reservation.startDate]];
-        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[self getDateString:reservation.endDate]];
+        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[LookUpReservationsControlla getDateString:reservation.startDate]];
+        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[LookUpReservationsControlla  getDateString:reservation.endDate]];
     } else {
         Reservation *reservation = [[self allReservations] objectAtIndex:indexPath.row];
         cell.labelOne.text = [[[[NSString alloc] initWithFormat:@"Guest Name: %@",reservation.guest.firstName] stringByAppendingString:@" "] stringByAppendingFormat:@"%@",reservation.guest.lastName];
-        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[self getDateString:reservation.startDate]];
-        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[self getDateString:reservation.endDate]];
+        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[LookUpReservationsControlla  getDateString:reservation.startDate]];
+        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[LookUpReservationsControlla  getDateString:reservation.endDate]];
     }
 
     
@@ -166,22 +163,15 @@
 }
 
 -(NSArray *)allReservations{
-    if (!_allReservations) {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSFetchRequest *reservationsByGuestRequest = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"guest" ascending:YES];
-        [reservationsByGuestRequest setSortDescriptors:@[descriptor]];
-
-        NSError *fetchError;
-        _allReservations = [[[appDelegate persistentContainer] viewContext]executeFetchRequest:reservationsByGuestRequest error:&fetchError];
-        
-        
-        
-    }
-    return _allReservations;
+    return self.allReservations = [[HotelService shared] getAllReservations];
 }
 
--(NSString *)getDateString:(NSDate *)date{
++(NSString *)getDateString:(NSDate *)date{
+    if (![date isKindOfClass:[NSDate class]]) {
+        NSException *exception = [NSException exceptionWithName:@"InvalidInputException" reason:@"Input not of type NSDate" userInfo:nil];
+        @throw exception;
+    }
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     return [dateFormatter stringFromDate:date];

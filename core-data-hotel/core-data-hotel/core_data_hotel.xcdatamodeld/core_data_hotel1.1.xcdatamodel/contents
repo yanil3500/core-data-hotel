@@ -7,7 +7,7 @@
         <relationship name="reservation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reservation" inverseName="guest" inverseEntity="Reservation" syncable="YES"/>
     </entity>
     <entity name="Hotel" representedClassName="Hotel" syncable="YES" codeGenerationType="class">
-        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hotelLocation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stars" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="rooms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Room" inverseName="hotel" inverseEntity="Room" syncable="YES"/>

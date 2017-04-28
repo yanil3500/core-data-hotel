@@ -7,21 +7,15 @@
 //
 
 #import "AvailabilityViewControlla.h"
-#import "AppDelegate.h"
 #import "AutoLayout.h"
-
-#import "Reservation+CoreDataClass.h"
-#import "Reservation+CoreDataProperties.h"
 
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
 
 #import "CustomCell.h"
-
 #import "BookViewControlla.h"
 
-#import "Hotel+CoreDataClass.h"
-#import "Hotel+CoreDataProperties.h"
+#import "HotelService.h"
 
 @interface AvailabilityViewControlla () <UITableViewDataSource, UITableViewDelegate>
 
@@ -47,40 +41,7 @@
 }
 
 -(NSFetchedResultsController *)availableRooms{
-    
-    if (!_availableRooms) {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-        request.predicate = [NSPredicate predicateWithFormat:@"startDate <= %@ AND endDate >= %@", self.endDate, self.startDate];
-        
-        NSError *fetchError;
-        NSArray *rooms = [[[appDelegate persistentContainer] viewContext] executeFetchRequest:request error:&fetchError];
-        NSMutableArray *unavailableRooms = [[NSMutableArray alloc] init];
-        
-        for (Reservation *reservation in rooms) {
-            [unavailableRooms addObject:reservation.room];
-        }
-        
-        NSFetchRequest *roomRequest = [NSFetchRequest  fetchRequestWithEntityName:@"Room"];
-        roomRequest.predicate = [NSPredicate predicateWithFormat:@"NOT self IN %@", unavailableRooms];
-        
-        NSSortDescriptor *roomSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"hotel.name" ascending:YES];
-        
-        NSSortDescriptor *roomNumberSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"roomNumber" ascending:YES];
-        
-        [roomRequest setSortDescriptors:@[roomSortDescriptor, roomNumberSortDescriptor]];
-        NSError *availableRoomError;
-        
-        _availableRooms = [[NSFetchedResultsController alloc] initWithFetchRequest:roomRequest managedObjectContext:appDelegate.persistentContainer.viewContext sectionNameKeyPath:@"hotel.name" cacheName:nil];
-        
-        [_availableRooms performFetch: &availableRoomError];
-        
-        
-    }
-    
-    
-    return _availableRooms;
+    return self.availableRooms = [[HotelService shared] getAllAvailableRoomsBetweenStartDate:self.startDate andEndDate:self.endDate];
 }
 #pragma mark UITableViewDataSource
 
@@ -90,7 +51,6 @@
     
     currentRoom = [self.availableRooms objectAtIndexPath:indexPath];
     
-    NSLog(@"Number of beds %i",[currentRoom beds]);
     
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     NSString *roomInformation = [[NSString alloc]initWithFormat:@"Room Number: %hd",[[self.availableRooms objectAtIndexPath:indexPath] roomNumber]];
@@ -112,7 +72,7 @@
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"Did select row");
+
     BookViewControlla *bookViewControlla = [[BookViewControlla alloc] init];
     [bookViewControlla setSelectedRoom:[self.availableRooms objectAtIndexPath:indexPath]];
     [bookViewControlla setStartDate:self.startDate];
@@ -147,6 +107,7 @@
     self.tableView.dataSource = self;
     
     self.tableView.delegate = self;
+    
 }
 
 
