@@ -7,9 +7,10 @@
 //
 
 #import "HotelService.h"
-#import "CoreDataSingleton.h"
+
 
 @implementation HotelService
+
 
 +(instancetype)shared{
     static HotelService *shared = nil;
@@ -21,7 +22,7 @@
 }
 
 
--(NSArray *)getAllHotels{
+-(NSArray *)allHotels{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hotel"];
     
     NSError *fetchError;
@@ -30,8 +31,9 @@
     if (fetchError){
         NSLog(@"Failed to fetch hotels from Core Data");
     }
+    _allHotels = hotels;
     
-    return hotels;
+    return _allHotels;
 }
 
 -(void)makeReservationSelectedRoom:(Room *)room
@@ -53,13 +55,6 @@
     reservation.room = room;
     
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-    NSError *errorFor;
-    NSInteger count = [[[[CoreDataSingleton shared] persistentContainer] viewContext] countForFetchRequest:request error:&errorFor];
-    
-    NSLog(@"(Inside of BookViewControlla) Number of reservations: %li", (long)count);
-    
-    NSLog(@"Inside of makeGuest: %@, Start Date: %@",[[reservation guest] firstName], [reservation startDate]);
     NSError *saveError;
     [[[[CoreDataSingleton shared] persistentContainer] viewContext] save:&saveError];
     
@@ -72,7 +67,7 @@
     
 }
 
--(NSFetchedResultsController *)getAllAvailableRoomsBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate{
+-(void)getAllAvailableRoomsBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate{
     NSFetchedResultsController *availableRooms;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
@@ -97,12 +92,11 @@
     NSError *availableRoomError;
     
     availableRooms = [[NSFetchedResultsController alloc] initWithFetchRequest:roomRequest managedObjectContext:[[[CoreDataSingleton shared]persistentContainer]viewContext] sectionNameKeyPath:@"hotel.name" cacheName:nil];
-    
     [availableRooms performFetch: &availableRoomError];
-    return availableRooms;
+    _allAvailableRooms = availableRooms;
 }
 
--(NSArray *)getAllReservations{
+-(NSArray *)allReservations{
     NSFetchRequest *reservationsByGuestRequest = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
     NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"guest" ascending:YES];
     [reservationsByGuestRequest setSortDescriptors:@[descriptor]];
@@ -111,7 +105,8 @@
     NSArray *reservations;
     
     reservations = [[[[CoreDataSingleton shared] persistentContainer] viewContext] executeFetchRequest:reservationsByGuestRequest error:&fetchError];
-    return reservations;
+    _allReservations = reservations;
+    return _allReservations;
 }
 
 

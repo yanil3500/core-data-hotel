@@ -86,14 +86,12 @@
     DatePickerViewControlla *datePickerViewControlla = [[DatePickerViewControlla alloc]init];
           [Answers logCustomEventWithName:@"Book button tapped." customAttributes:nil];
     [[self navigationController] pushViewController:datePickerViewControlla animated:YES];
-    NSLog(@"bookButton selected");
 }
 
 -(void)lookUpButtonPressed{
     LookUpReservationsControlla *lookUpReservationsControlla = [[LookUpReservationsControlla alloc]init];
      [Answers logCustomEventWithName:@"Lookup button tapped." customAttributes:nil];
     [[self navigationController] pushViewController:lookUpReservationsControlla animated:YES];
-    NSLog(@"lookUpButton selected");
 }
 
 -(UIButton *)createButtonWithTitle:(NSString *)title {

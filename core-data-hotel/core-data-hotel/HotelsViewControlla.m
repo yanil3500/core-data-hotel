@@ -18,7 +18,6 @@
 #import "HotelService.h"
 @interface HotelsViewControlla () <UITableViewDataSource, UITableViewDelegate>
 
-@property(strong, nonatomic) NSArray *allHotels;
 
 @property(strong, nonatomic) UITableView *tableView;
 
@@ -33,10 +32,6 @@
 }
 
 
--(NSArray *)allHotels{
-    return self.allHotels = [[HotelService shared] getAllHotels];
-}
-
 -(void)loadView{
     [super loadView];
     self.navigationController.topViewController.title = @"Hotels";
@@ -49,30 +44,28 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section {
     
-    NSLog(@"Number of hotels: %lu",(unsigned long)self.allHotels.count);
-    return self.allHotels.count;
+    return [[[HotelService shared] allHotels] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    [[cell labelOne] setText:[[NSString alloc]initWithString:[[[self allHotels] objectAtIndex:indexPath.row] name]]];
+    [[cell labelOne] setText:[[NSString alloc]initWithString:[[[[HotelService shared] allHotels] objectAtIndex:indexPath.row] name]]];
     [[cell labelOne] setFont:[UIFont boldSystemFontOfSize:16]];
     
-    [[cell labelTwo] setText:[[NSString alloc]initWithFormat:@"Location: %@",[[[self allHotels] objectAtIndex:indexPath.row] hotelLocation]]];
+    [[cell labelTwo] setText:[[NSString alloc]initWithFormat:@"Location: %@",[[[[HotelService shared] allHotels] objectAtIndex:indexPath.row] hotelLocation]]];
     
-    [[cell labelThree] setText:[[[NSString alloc]initWithFormat:@"Rating: %hd",[[[self allHotels] objectAtIndex:indexPath.row] stars]] stringByAppendingString:@" Stars"]];
+    [[cell labelThree] setText:[[[NSString alloc]initWithFormat:@"Rating: %hd",[[[[HotelService shared] allHotels] objectAtIndex:indexPath.row] stars]] stringByAppendingString:@" Stars"]];
     return cell;
 }
 
 
 #pragma mark UITableViewDataDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"Selected row: %li", (long)indexPath.row);
     
     RoomsViewControlla *roomsViewControlla = [[RoomsViewControlla alloc] init];
     
-    [roomsViewControlla setAllRooms: [[self.allHotels[indexPath.row] rooms] allObjects]];
-    
+//    [roomsViewControlla setAllRooms: [[[[HotelService shared] allHotels][indexPath.row] rooms] allObjects]];
+    roomsViewControlla.hotel = [[HotelService shared] allHotels][indexPath.row];
     [[self navigationController] pushViewController:roomsViewControlla animated:YES];
 }
 

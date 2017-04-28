@@ -6,14 +6,14 @@
 //  Copyright © 2017 Elyanil Liranzo Castro. All rights reserved.
 //
 #import "AutoLayout.h"
+#import "HotelService.h"
 #import "RoomsViewControlla.h"
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
 
 @interface RoomsViewControlla () <UITableViewDataSource>
 
-@property(strong, nonatomic) NSArray *allRooms;
-
+@property (strong, nonatomic) NSArray *allRooms;
 @property(strong, nonatomic) UITableView *tableView;
 @end
 
@@ -21,8 +21,9 @@
 
 #pragma mark Setter and Getter
 
--(void)setAllRooms:(NSArray *)rooms{
-    _allRooms = rooms;
+-(NSArray *)allRooms{
+    _allRooms = [self.hotel.rooms allObjects];
+    return _allRooms;
 }
 
 - (void)viewDidLoad {

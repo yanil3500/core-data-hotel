@@ -11,5 +11,8 @@
 @interface LookUpReservationsControlla : UIViewController
 
 +(NSString *)getDateString:(NSDate *)date;
++(NSPredicate *)filterByFirstName:(NSString *)firstName
+                      andLastName:(NSString *)lastName
+                 usingSearchTerms:(NSString *)searchTerms;
 
 @end

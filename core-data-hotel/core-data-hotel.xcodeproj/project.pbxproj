@@ -26,7 +26,7 @@
 		CDF454B61EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = CDF454B51EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel */; };
 		CDF454BB1EB26E7300585320 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF454B91EB26E7300585320 /* Fabric.framework */; };
 		CDF454BC1EB26E7400585320 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF454BA1EB26E7300585320 /* Crashlytics.framework */; };
-		CDF454BE1EB29F3800585320 /* LookReservationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454BD1EB29F3800585320 /* LookReservationsTests.m */; };
+		CDF454BE1EB29F3800585320 /* LookUpReservationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454BD1EB29F3800585320 /* LookUpReservationsTests.m */; };
 		CDF454C11EB2A69100585320 /* CoreDataSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454C01EB2A69100585320 /* CoreDataSingleton.m */; };
 		CDF454C41EB2AB4400585320 /* HotelService.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454C31EB2AB4400585320 /* HotelService.m */; };
 /* End PBXBuildFile section */
@@ -76,7 +76,7 @@
 		CDF454B51EB25FFC00585320 /* mappingModel1.0-1.1.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "mappingModel1.0-1.1.xcmappingmodel"; sourceTree = "<group>"; };
 		CDF454B91EB26E7300585320 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CDF454BA1EB26E7300585320 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		CDF454BD1EB29F3800585320 /* LookReservationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookReservationsTests.m; sourceTree = "<group>"; };
+		CDF454BD1EB29F3800585320 /* LookUpReservationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookUpReservationsTests.m; sourceTree = "<group>"; };
 		CDF454BF1EB2A69100585320 /* CoreDataSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataSingleton.h; sourceTree = "<group>"; };
 		CDF454C01EB2A69100585320 /* CoreDataSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataSingleton.m; sourceTree = "<group>"; };
 		CDF454C21EB2AB4400585320 /* HotelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelService.h; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 			children = (
 				CDF454AC1EB1144E00585320 /* AutoLayoutTests.m */,
 				CDF454A61EB111CD00585320 /* Info.plist */,
-				CDF454BD1EB29F3800585320 /* LookReservationsTests.m */,
+				CDF454BD1EB29F3800585320 /* LookUpReservationsTests.m */,
 			);
 			path = "core-data-hotelTests";
 			sourceTree = "<group>";
@@ -347,7 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF454AD1EB1144E00585320 /* AutoLayoutTests.m in Sources */,
-				CDF454BE1EB29F3800585320 /* LookReservationsTests.m in Sources */,
+				CDF454BE1EB29F3800585320 /* LookUpReservationsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

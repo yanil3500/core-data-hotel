@@ -10,13 +10,19 @@
 #import "CoreDataSingleton.h"
 @interface HotelService : NSObject
 
+
+@property(strong, nonatomic) NSArray *allHotels;
+@property (strong, nonatomic)NSArray *allReservations;
+@property(strong, nonatomic) NSArray *allRooms;
+@property(strong, nonatomic) NSFetchedResultsController *allAvailableRooms;
+
+
+
 +(instancetype)shared;
 
--(NSArray *)getAllHotels;
 
--(NSArray *)getAllReservations;
 
--(NSFetchedResultsController *)getAllAvailableRoomsBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
+-(void)getAllAvailableRoomsBetweenStartDate:(NSDate *)startDate andEndDate:(NSDate *)endDate;
 
 -(void)makeReservationSelectedRoom:(Room *)room
                      WithFirstName:(NSString *)firstName
