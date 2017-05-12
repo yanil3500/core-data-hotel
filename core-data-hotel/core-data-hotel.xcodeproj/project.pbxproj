@@ -21,6 +21,8 @@
 		CDBA68561EAE95A8003026EC /* hotels.json in Resources */ = {isa = PBXBuildFile; fileRef = CDBA68531EAE95A8003026EC /* hotels.json */; };
 		CDBA685B1EAEA488003026EC /* HotelsViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA685A1EAEA488003026EC /* HotelsViewControlla.m */; };
 		CDBA68611EAED425003026EC /* RoomsViewControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA68601EAED425003026EC /* RoomsViewControlla.m */; };
+		CDF454AD1EB1144E00585320 /* AutoLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454AC1EB1144E00585320 /* AutoLayoutTests.m */; };
+		CDF454B01EB157E500585320 /* LookUpReservationsControlla.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF454AF1EB157E500585320 /* LookUpReservationsControlla.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,9 @@
 		CDBA68601EAED425003026EC /* RoomsViewControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomsViewControlla.m; sourceTree = "<group>"; };
 		CDF454A21EB111CD00585320 /* core-data-hotelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "core-data-hotelTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF454A61EB111CD00585320 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDF454AC1EB1144E00585320 /* AutoLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutTests.m; sourceTree = "<group>"; };
+		CDF454AE1EB157E500585320 /* LookUpReservationsControlla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookUpReservationsControlla.h; sourceTree = "<group>"; };
+		CDF454AF1EB157E500585320 /* LookUpReservationsControlla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookUpReservationsControlla.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +159,8 @@
 				CD0F8B551EAFCF8100691701 /* AvailabilityViewControlla.m */,
 				CD0F8B571EB0063100691701 /* BookViewControlla.h */,
 				CD0F8B581EB0063100691701 /* BookViewControlla.m */,
+				CDF454AE1EB157E500585320 /* LookUpReservationsControlla.h */,
+				CDF454AF1EB157E500585320 /* LookUpReservationsControlla.m */,
 				CDBA685F1EAED425003026EC /* RoomsViewControlla.h */,
 				CDBA68601EAED425003026EC /* RoomsViewControlla.m */,
 				CDBA68591EAEA488003026EC /* HotelsViewControlla.h */,
@@ -165,6 +172,7 @@
 		CDF454A31EB111CD00585320 /* core-data-hotelTests */ = {
 			isa = PBXGroup;
 			children = (
+				CDF454AC1EB1144E00585320 /* AutoLayoutTests.m */,
 				CDF454A61EB111CD00585320 /* Info.plist */,
 			);
 			path = "core-data-hotelTests";
@@ -283,6 +291,7 @@
 				CD8ABA3F1EAE5FC100C5E846 /* AppDelegate.m in Sources */,
 				CD0F8B561EAFCF8100691701 /* AvailabilityViewControlla.m in Sources */,
 				CD8ABA3C1EAE5FC100C5E846 /* main.m in Sources */,
+				CDF454B01EB157E500585320 /* LookUpReservationsControlla.m in Sources */,
 				CDBA685B1EAEA488003026EC /* HotelsViewControlla.m in Sources */,
 				CD8ABA561EAE6D3900C5E846 /* AutoLayout.m in Sources */,
 			);
@@ -292,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF454AD1EB1144E00585320 /* AutoLayoutTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

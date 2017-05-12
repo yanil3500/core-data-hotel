@@ -10,13 +10,13 @@
 
 @interface AvailabilityViewCell : UITableViewCell
 
-@property(strong, nonatomic) UILabel *roomNumberForCell;
-@property(strong, nonatomic) UILabel *numberOfBedsForCell;
-@property(strong, nonatomic) UILabel *roomRateForCell;
+@property(strong, nonatomic) UILabel *labelOne;
+@property(strong, nonatomic) UILabel *labelTwo;
+@property(strong, nonatomic) UILabel *labelThree;
 
 
 
--(UILabel *)roomNumberForCell;
--(UILabel *)numberOfBedsForCell;
--(UILabel *)roomRateForCell;
+-(UILabel *)labelOne;
+-(UILabel *)labelTwo;
+-(UILabel *)labelThree;
 @end

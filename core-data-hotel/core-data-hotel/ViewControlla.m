@@ -10,6 +10,7 @@
 #import "AutoLayout.h"
 #import "HotelsViewControlla.h"
 #import "DatePickerViewControlla.h"
+#import "LookUpReservationsControlla.h"
 
 @interface ViewControlla ()
 
@@ -85,6 +86,8 @@
 }
 
 -(void)lookUpButtonPressed{
+    LookUpReservationsControlla *lookUpReservationsControlla = [[LookUpReservationsControlla alloc]init];
+    [[self navigationController] pushViewController:lookUpReservationsControlla animated:YES];
     NSLog(@"lookUpButton selected");
 }
 

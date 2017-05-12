@@ -97,6 +97,13 @@
     reservation.room = self.selectedRoom;
     
     
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
+    NSError *errorFor;
+    NSInteger count = [[[appDelegate persistentContainer]viewContext] countForFetchRequest:request error:&errorFor];
+    
+    NSLog(@"(Inside of BookViewControlla) Number of reservations: %li", (long)count);
+    
+    NSLog(@"Inside of makeGuest: %@, Start Date: %@",[[reservation guest] firstName], [reservation startDate]);
     NSError *saveError;
     [appDelegate.persistentContainer.viewContext save:&saveError];
     
