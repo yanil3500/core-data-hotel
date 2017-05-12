@@ -13,6 +13,8 @@
 @interface DatePickerViewControlla ()
 @property(strong, nonatomic)UIDatePicker *endDate;
 @property(strong, nonatomic)UIDatePicker *startDate;
+@property(strong, nonatomic)UILabel* startDateLabel;
+@property(strong, nonatomic)UILabel* endDateLabel;
 
 @end
 
@@ -27,14 +29,14 @@
 
 -(void)loadView{
     [super loadView];
-    [self setupDoneButton];
-    [self setupDatePickers];
+    [self setUpDoneButton];
+    [self setUpDatePickers];
     [[self view] setBackgroundColor:[UIColor whiteColor]];
 }
 
 #pragma mark UIDatePicker helper methods
 
--(void)setupDatePickers {
+-(void)setUpDatePickers {
     self.startDate = [[UIDatePicker alloc]init];
     self.endDate = [[UIDatePicker alloc] init];
     
@@ -47,10 +49,25 @@
     [[self startDate] setMinimumDate:[NSDate date]];
     [[self endDate] setMinimumDate:[NSDate date]];
     
+    [self setUpDatePickerLabel];
+    
     [self autoLayoutForDatePicker];
     
 }
-
+-(void)setUpDatePickerLabel{
+    self.startDateLabel = [[UILabel alloc] init];
+    self.endDateLabel = [[UILabel alloc]init];
+    
+    [[self view] addSubview:self.startDateLabel];
+    [[self view] addSubview:self.endDateLabel];
+    
+    [self.startDateLabel setBackgroundColor:[UIColor grayColor]];
+    [self.endDateLabel setBackgroundColor:[UIColor grayColor]];
+    
+    [self.startDateLabel setText:@"Start Date"];
+    [self.endDateLabel setText:@"End Date"];
+    
+}
 -(void)doneButtonPressed{
     NSLog(@"doneButtonPressed");
     AvailabilityViewControlla *availabilityViewControlla = [[AvailabilityViewControlla alloc] init];
@@ -59,8 +76,8 @@
     [[self navigationController] pushViewController:availabilityViewControlla animated:YES];
 }
 
--(void)setupDoneButton{
-    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];    
+-(void)setUpDoneButton{
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
     [[self navigationItem] setRightBarButtonItem:done];
 }
 
@@ -70,22 +87,26 @@
     CGFloat topMargin = navBarHeight + statusBarHeight;
     CGFloat windowHeight = self.view.frame.size.height;
     CGFloat frameHeight =((windowHeight - topMargin) / 2);
+    CGFloat heightForLabels = frameHeight / 8;
     
-    NSDictionary *viewDictionary = @{@"startDate":self.startDate, @"endDate":self.endDate};
+    NSDictionary *viewDictionary = @{@"startDate":self.startDate, @"startDateLabel":self.startDateLabel, @"endDate":self.endDate, @"endDateLabel":self.endDateLabel};
     
-    NSDictionary *metricDictionary = @{@"topMargin":[NSNumber numberWithFloat:topMargin],@"frameHeight":[NSNumber numberWithFloat:frameHeight]};
+    NSDictionary *metricDictionary = @{@"topMargin":[NSNumber numberWithFloat:topMargin],@"frameHeight":[NSNumber numberWithFloat:frameHeight],@"heightForLabels":[NSNumber numberWithFloat:heightForLabels]};
     
-    NSString *visualFormat = @"V:|-topMargin-[startDate(==frameHeight)][endDate(==startDate)]|";
+    NSString *visualFormat = @"V:|-topMargin-[startDateLabel(==heightForLabels)][startDate(==frameHeight)]-[endDateLabel(==startDateLabel)][endDate(==startDate)]|";
     
-    [AutoLayout leadingConstraintFromView:self.startDate toView:self.view];
-    [AutoLayout trailingConstraintFromView:self.startDate toView:self.view];
-    [AutoLayout leadingConstraintFromView:self.endDate toView:self.view];
-    [AutoLayout trailingConstraintFromView:self.endDate toView:self.view];
+    [AutoLayout leadingConstraintAndTrailingConstraintFromView:self.startDate toView:self.view];
+    [AutoLayout leadingConstraintAndTrailingConstraintFromView:self.endDate toView:self.view];
+
+    
+    [AutoLayout leadingConstraintAndTrailingConstraintFromView:self.startDateLabel toView:self.view];
+    
+    [AutoLayout leadingConstraintAndTrailingConstraintFromView:self.endDateLabel toView:self.view];
+    
+
     
     [AutoLayout constraintsWithVFLForViewDictionary:viewDictionary forMetricsDictionary:metricDictionary withOptions:0 withVisualFormat:visualFormat];
     
-    [self.startDate setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.endDate setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
 

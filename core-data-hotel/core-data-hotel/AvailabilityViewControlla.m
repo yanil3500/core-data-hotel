@@ -16,7 +16,11 @@
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
 
-@interface AvailabilityViewControlla () <UITableViewDataSource>
+#import "AvailabilityViewCell.h"
+
+#import "BookViewControlla.h"
+
+@interface AvailabilityViewControlla () <UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) UITableView *tableView;
 
@@ -33,6 +37,7 @@
 
 - (void)loadView{
     [super loadView];
+    self.navigationController.topViewController.title = @"Availability";
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setUpTableView];
     
@@ -65,30 +70,17 @@
     
     return _availableRooms;
 }
-
-
-#pragma mark UITableView helper methods
--(void) setUpTableView {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height) style:UITableViewStylePlain];
-    
-//    [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    self.tableView.dataSource = self;
-    
-    [self.view addSubview:self.tableView];
-    
-}
-
 #pragma mark UITableViewDataSource
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = @"Money";
+    AvailabilityViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    NSString *roomInformation = [[NSString alloc]initWithFormat:@"Room Number: %hd",[[self availableRooms][indexPath.row] roomNumber]];
+    [[cell roomNumberForCell] setText:roomInformation];
+    NSString *numberOfBeds = [[NSString alloc]initWithFormat:@"Number of beds: %i",[[self availableRooms][indexPath.row] beds]];
+    [[cell numberOfBedsForCell] setText:numberOfBeds];
+    NSString *costOfRoom = [[NSString alloc]initWithFormat:@"Rate: $%.02f a night",[[self availableRooms][indexPath.row] rate]];
+    [[cell roomRateForCell] setText:costOfRoom];
     
     return cell;
     
@@ -97,5 +89,39 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.availableRooms.count;
 }
+
+#pragma mark UITableViewDelegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"Did select row");
+    
+    BookViewControlla *bookViewControlla = [[BookViewControlla alloc] init];
+    [bookViewControlla setSelectedRoom:[self availableRooms][indexPath.row]];
+    [bookViewControlla setStartDate:self.startDate];
+    [bookViewControlla setEndDate:self.endDate];
+    [[self navigationController] pushViewController:bookViewControlla animated:true];
+}
+
+#pragma mark UITableView helper methods
+-(void) setUpTableView {
+    
+    self.tableView = [[UITableView alloc]init];
+    [self.view addSubview:self.tableView];
+    
+    [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
+    
+    [self.tableView registerClass:[AvailabilityViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    
+    [self.tableView setEstimatedRowHeight:50.0];
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    self.tableView.dataSource = self;
+    
+    self.tableView.delegate = self;
+}
+
+
 
 @end

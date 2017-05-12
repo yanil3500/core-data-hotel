@@ -7,14 +7,14 @@
 //
 
 #import "HotelsViewControlla.h"
-
 #import "RoomsViewControlla.h"
 
 #import "AppDelegate.h"
 
 #import "Hotel+CoreDataClass.h"
-
 #import "Hotel+CoreDataProperties.h"
+
+#import "AutoLayout.h"
 @interface HotelsViewControlla () <UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) NSArray *allHotels;
@@ -27,24 +27,15 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"Inside of HotelsViewControlla");
-    self.navigationController.topViewController.title = @"Hotels";
-    self.view.backgroundColor = [UIColor whiteColor];
 
-    
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    // Do any additional setup after loading the view.
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    [self.view addSubview: self.tableView];
+
 }
 
 -(void)loadView{
     [super loadView];
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, UIScreen.mainScreen.bounds.size.height) style:UITableViewStylePlain];
-    
+    self.navigationController.topViewController.title = @"Hotels";
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self setUpTableView];
 }
 
 
@@ -64,7 +55,6 @@
     }
     return _allHotels;
 }
-
 #pragma mark UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
@@ -92,5 +82,21 @@
     [[self navigationController] pushViewController:roomsViewControlla animated:YES];
 }
 
+
+#pragma mark UITableView helper methods
+-(void) setUpTableView {
+    
+    self.tableView = [[UITableView alloc]init];
+    [self.view addSubview:self.tableView];
+    
+    [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+}
 
 @end
