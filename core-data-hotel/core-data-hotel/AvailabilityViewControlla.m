@@ -7,27 +7,19 @@
 //
 
 #import "AvailabilityViewControlla.h"
-#import "AppDelegate.h"
 #import "AutoLayout.h"
-
-#import "Reservation+CoreDataClass.h"
-#import "Reservation+CoreDataProperties.h"
 
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
 
-#import "AvailabilityViewCell.h"
-
+#import "CustomCell.h"
 #import "BookViewControlla.h"
 
-#import "Hotel+CoreDataClass.h"
-#import "Hotel+CoreDataProperties.h"
+#import "HotelService.h"
 
 @interface AvailabilityViewControlla () <UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) UITableView *tableView;
-
-@property(strong, nonatomic) NSFetchedResultsController *availableRooms;
 
 @end
 
@@ -39,6 +31,7 @@
 }
 
 - (void)loadView{
+    [[HotelService shared] getAllAvailableRoomsBetweenStartDate:self.startDate andEndDate:self.endDate];
     [super loadView];
     self.navigationController.topViewController.title = @"Availability";
     [self.view setBackgroundColor:[UIColor whiteColor]];
@@ -46,51 +39,20 @@
     
 }
 
--(NSFetchedResultsController *)availableRooms{
-    
-    if (!_availableRooms) {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-        request.predicate = [NSPredicate predicateWithFormat:@"startDate <= %@ AND endDate >= %@", self.endDate, self.startDate];
-        
-        NSError *fetchError;
-        NSArray *rooms = [[[appDelegate persistentContainer] viewContext] executeFetchRequest:request error:&fetchError];
-        NSMutableArray *unavailableRooms = [[NSMutableArray alloc] init];
-        
-        for (Reservation *reservation in rooms) {
-            [unavailableRooms addObject:reservation.room];
-        }
-        
-        NSFetchRequest *roomRequest = [NSFetchRequest  fetchRequestWithEntityName:@"Room"];
-        roomRequest.predicate = [NSPredicate predicateWithFormat:@"NOT self IN %@", unavailableRooms];
-        
-        NSSortDescriptor *roomSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"hotel.name" ascending:YES];
-        
-        NSSortDescriptor *roomNumberSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"roomNumber" ascending:YES];
-        [roomRequest setSortDescriptors:@[roomSortDescriptor, roomNumberSortDescriptor]];
-        NSError *availableRoomError;
-        
-        _availableRooms = [[NSFetchedResultsController alloc] initWithFetchRequest:roomRequest managedObjectContext:appDelegate.persistentContainer.viewContext sectionNameKeyPath:@"hotel.name" cacheName:nil];
-        
-        [_availableRooms performFetch: &availableRoomError];
-        
-        
-    }
-    
-    
-    return _availableRooms;
-}
 #pragma mark UITableViewDataSource
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    AvailabilityViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    NSString *roomInformation = [[NSString alloc]initWithFormat:@"Room Number: %hd",[[self.availableRooms objectAtIndexPath:indexPath] roomNumber]];
+    Room *currentRoom = [[Room alloc]init];
+    
+    currentRoom = [[[HotelService shared] allAvailableRooms] objectAtIndexPath:indexPath];
+    
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    NSString *roomInformation = [[NSString alloc]initWithFormat:@"Room Number: %hd",[[[[HotelService shared] allAvailableRooms] objectAtIndexPath:indexPath] roomNumber]];
     [[cell labelOne] setText:roomInformation];
-    NSString *numberOfBeds = [[NSString alloc]initWithFormat:@"Number of beds: %i",[[self.availableRooms objectAtIndexPath:indexPath] beds]];
+    NSString *numberOfBeds = [[NSString alloc]initWithFormat:@"Number of beds: %i",[[[[HotelService shared] allAvailableRooms] objectAtIndexPath:indexPath] beds]];
     [[cell labelTwo] setText:numberOfBeds];
-    NSString *costOfRoom = [[NSString alloc]initWithFormat:@"Rate: $%.02f a night",[[self.availableRooms objectAtIndexPath:indexPath] rate]];
+    NSString *costOfRoom = [[NSString alloc]initWithFormat:@"Rate: $%.02f a night",[[[[HotelService shared] allAvailableRooms] objectAtIndexPath:indexPath] rate]];
     [[cell labelThree] setText:costOfRoom];
     
     return cell;
@@ -98,28 +60,28 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id<NSFetchedResultsSectionInfo> sectionInfo = [[self.availableRooms sections] objectAtIndex:section];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [[[[HotelService shared] allAvailableRooms]sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
 
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"Did select row");
+
     BookViewControlla *bookViewControlla = [[BookViewControlla alloc] init];
-    [bookViewControlla setSelectedRoom:[self.availableRooms objectAtIndexPath:indexPath]];
+    [bookViewControlla setSelectedRoom:[[[HotelService shared] allAvailableRooms] objectAtIndexPath:indexPath]];
     [bookViewControlla setStartDate:self.startDate];
     [bookViewControlla setEndDate:self.endDate];
     [[self navigationController] pushViewController:bookViewControlla animated:true];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.availableRooms.sections.count;
+    return [[[[HotelService shared] allAvailableRooms]sections]count];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
-    return [[[self.availableRooms sections] objectAtIndex:section] name];
+    return [[[[[HotelService shared] allAvailableRooms] sections] objectAtIndex:section] name];
 }
 
 #pragma mark UITableView helper methods
@@ -131,7 +93,7 @@
     
     [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
     
-    [self.tableView registerClass:[AvailabilityViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CustomCell class] forCellReuseIdentifier:@"cell"];
     
     [self.tableView setEstimatedRowHeight:50.0];
     
@@ -140,6 +102,7 @@
     self.tableView.dataSource = self;
     
     self.tableView.delegate = self;
+    
 }
 
 

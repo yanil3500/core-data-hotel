@@ -67,8 +67,6 @@
         [[self endDate]setDate:([NSDate date])];
         [[self startDate] setDate:[NSDate date]];
     }
-    NSLog(@"What is the start date?: %@",[self getDateString:[[self startDate] date]]);
-    NSLog(@"What is the end date?: %@",[self getDateString:[[self endDate] date]]);
 }
 
 -(void)setUpDatePickerLabel{
@@ -95,7 +93,6 @@
         [availabilityViewControlla setEndDate: self.endDate.date];
         [availabilityViewControlla setStartDate: self.startDate.date];
     }
-    NSLog(@"doneButtonPressed");
     [availabilityViewControlla setEndDate: self.endDate.date];
     [availabilityViewControlla setStartDate: self.startDate.date];
     [[self navigationController] pushViewController:availabilityViewControlla animated:YES];
@@ -130,16 +127,10 @@
     [AutoLayout leadingConstraintAndTrailingConstraintFromView:self.endDateLabel toView:self.view];
     
 
-    
     [AutoLayout constraintsWithVFLForViewDictionary:viewDictionary forMetricsDictionary:metricDictionary withOptions:0 withVisualFormat:visualFormat];
     
 }
 
--(NSString *)getDateString:(NSDate *)date{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    return [dateFormatter stringFromDate:date];
-}
 
 
 @end

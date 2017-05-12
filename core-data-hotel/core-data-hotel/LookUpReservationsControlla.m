@@ -9,19 +9,16 @@
 #import "LookUpReservationsControlla.h"
 #import "AutoLayout.h"
 
-#import "AppDelegate.h"
-
 #import "Reservation+CoreDataClass.h"
 #import "Reservation+CoreDataProperties.h"
 
-#import "Guest+CoreDataClass.h"
-#import "Guest+CoreDataProperties.h"
-#import "AvailabilityViewCell.h"
+#import "CustomCell.h"
+
+#import "HotelService.h"
 
 @interface LookUpReservationsControlla () <UITableViewDataSource, UISearchBarDelegate>
 @property (strong, nonatomic)UITableView *tableView;
 @property (strong, nonatomic)UISearchBar *searchBar;
-@property (strong, nonatomic)NSArray *allReservations;
 @property (strong, nonatomic)NSMutableArray *filteredResults;
 @property BOOL isSearching;
 @end
@@ -36,7 +33,6 @@
 -(void)loadView{
     
     [super loadView];
-    [self allReservations];
     self.navigationController.topViewController.title = @"Reservations";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setUpSearchBar];
@@ -47,19 +43,18 @@
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"Inside of allReservations: ");
-    AvailabilityViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     if(self.filteredResults != nil){
         Reservation *reservation = [[self filteredResults] objectAtIndex:indexPath.row];
         cell.labelOne.text = [[[[NSString alloc] initWithFormat:@"Guest Name: %@",reservation.guest.firstName] stringByAppendingString:@" "] stringByAppendingFormat:@"%@",reservation.guest.lastName];
-        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[self getDateString:reservation.startDate]];
-        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[self getDateString:reservation.endDate]];
+        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[LookUpReservationsControlla getDateString:reservation.startDate]];
+        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[LookUpReservationsControlla  getDateString:reservation.endDate]];
     } else {
-        Reservation *reservation = [[self allReservations] objectAtIndex:indexPath.row];
+        Reservation *reservation = [[[HotelService shared] allReservations] objectAtIndex:indexPath.row];
         cell.labelOne.text = [[[[NSString alloc] initWithFormat:@"Guest Name: %@",reservation.guest.firstName] stringByAppendingString:@" "] stringByAppendingFormat:@"%@",reservation.guest.lastName];
-        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[self getDateString:reservation.startDate]];
-        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[self getDateString:reservation.endDate]];
+        cell.labelTwo.text = [[NSString alloc] initWithFormat:@"Start Date: %@",[LookUpReservationsControlla  getDateString:reservation.startDate]];
+        cell.labelThree.text = [[NSString alloc] initWithFormat:@"End Date: %@",[LookUpReservationsControlla  getDateString:reservation.endDate]];
     }
 
     
@@ -71,7 +66,7 @@
     if (self.isSearching) {
         return self.filteredResults.count;
     } else {
-        return self.allReservations.count;
+        return [[[HotelService shared] allReservations] count];
     }
     
 }
@@ -83,14 +78,14 @@
     self.isSearching = YES;
     self.filteredResults = [[NSMutableArray alloc] init];
     
-    [self.filteredResults setArray:[[self.allReservations filteredArrayUsingPredicate:[self filterByFirstName:@"guest.firstName" andLastName:@"guest.lastName" usingSearchTerms:searchBar.text]]mutableCopy]];
+    [self.filteredResults setArray:[[[[HotelService shared] allReservations] filteredArrayUsingPredicate:[LookUpReservationsControlla filterByFirstName:@"guest.firstName" andLastName:@"guest.lastName" usingSearchTerms:searchBar.text]]mutableCopy]];
     [[self tableView] reloadData];
     
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     self.isSearching = YES;
-    [self.filteredResults setArray:[[self.allReservations filteredArrayUsingPredicate:[self filterByFirstName:@"guest.firstName" andLastName:@"guest.lastName" usingSearchTerms:searchBar.text]]mutableCopy]];
+    [self.filteredResults setArray:[[[[HotelService shared] allReservations] filteredArrayUsingPredicate:[LookUpReservationsControlla filterByFirstName:@"guest.firstName" andLastName:@"guest.lastName" usingSearchTerms:searchBar.text]]mutableCopy]];
     [[self tableView] reloadData];
 }
 
@@ -106,9 +101,9 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     if (searchBar.text != nil) {
         self.filteredResults = [[NSMutableArray alloc]init];
-        [self.filteredResults setArray:[[self.allReservations filteredArrayUsingPredicate:[self filterByFirstName:@"guest.firstName" andLastName:@"guest.lastName" usingSearchTerms:searchBar.text]]mutableCopy]];
+        [self.filteredResults setArray:[[[[HotelService shared] allReservations] filteredArrayUsingPredicate:[LookUpReservationsControlla filterByFirstName:@"guest.firstName" andLastName:@"guest.lastName" usingSearchTerms:searchBar.text]]mutableCopy]];
     }
-    self.isSearching = NO;
+//    self.isSearching = ;
 }
 
 #pragma mark UISearchBar helper methods
@@ -129,7 +124,7 @@
     
     [self.view addSubview:[self tableView]];
     
-    [self.tableView registerClass: [AvailabilityViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass: [CustomCell class] forCellReuseIdentifier:@"cell"];
     
     [self.tableView setEstimatedRowHeight:50.0];
     
@@ -165,23 +160,12 @@
     
 }
 
--(NSArray *)allReservations{
-    if (!_allReservations) {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSFetchRequest *reservationsByGuestRequest = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"guest" ascending:YES];
-        [reservationsByGuestRequest setSortDescriptors:@[descriptor]];
-
-        NSError *fetchError;
-        _allReservations = [[[appDelegate persistentContainer] viewContext]executeFetchRequest:reservationsByGuestRequest error:&fetchError];
-        
-        
-        
++(NSString *)getDateString:(NSDate *)date{
+    if (![date isKindOfClass:[NSDate class]]) {
+        NSException *exception = [NSException exceptionWithName:@"InvalidInputException" reason:@"Input not of type NSDate" userInfo:nil];
+        @throw exception;
     }
-    return _allReservations;
-}
-
--(NSString *)getDateString:(NSDate *)date{
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     return [dateFormatter stringFromDate:date];
@@ -189,9 +173,13 @@
 
 #pragma mark NSPredicateHelper
 
--(NSPredicate *)filterByFirstName:(NSString *)firstName
++(NSPredicate *)filterByFirstName:(NSString *)firstName
                       andLastName:(NSString *)lastName
                  usingSearchTerms:(NSString *)searchTerms{
+    if (firstName == nil || lastName == nil || searchTerms == nil ) {
+        NSException *exception = [NSException exceptionWithName:@"InvalidInputException" reason:@"Input not of type NSString" userInfo:nil];
+        @throw exception;
+    }
     return [NSPredicate predicateWithFormat:@"%K CONTAINS[cd] %@ || %K CONTAINS[cd] %@"
                               argumentArray:@[firstName, searchTerms, lastName, searchTerms]];
 }

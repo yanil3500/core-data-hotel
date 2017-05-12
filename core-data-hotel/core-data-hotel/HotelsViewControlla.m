@@ -9,15 +9,15 @@
 #import "HotelsViewControlla.h"
 #import "RoomsViewControlla.h"
 
-#import "AppDelegate.h"
-
 #import "Hotel+CoreDataClass.h"
 #import "Hotel+CoreDataProperties.h"
 
 #import "AutoLayout.h"
+#import "CustomCell.h"
+
+#import "HotelService.h"
 @interface HotelsViewControlla () <UITableViewDataSource, UITableViewDelegate>
 
-@property(strong, nonatomic) NSArray *allHotels;
 
 @property(strong, nonatomic) UITableView *tableView;
 
@@ -31,6 +31,7 @@
 
 }
 
+
 -(void)loadView{
     [super loadView];
     self.navigationController.topViewController.title = @"Hotels";
@@ -38,47 +39,33 @@
     [self setUpTableView];
 }
 
-
--(NSArray *)allHotels{
-    if(!_allHotels){
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hotel"];
-        
-        NSError *fetchError;
-        NSArray *hotels = [[[appDelegate persistentContainer] viewContext]  executeFetchRequest:request error: &fetchError];
-        
-        if (fetchError){
-            NSLog(@"Failed to fetch hotels from Core Data");
-        }
-        
-        _allHotels = hotels;
-    }
-    return _allHotels;
-}
 #pragma mark UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section {
-    return self.allHotels.count;
+    
+    return [[[HotelService shared] allHotels] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = [self.allHotels[indexPath.row] name];
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    [[cell labelOne] setText:[[NSString alloc]initWithString:[[[[HotelService shared] allHotels] objectAtIndex:indexPath.row] name]]];
+    [[cell labelOne] setFont:[UIFont boldSystemFontOfSize:16]];
     
+    [[cell labelTwo] setText:[[NSString alloc]initWithFormat:@"Location: %@",[[[[HotelService shared] allHotels] objectAtIndex:indexPath.row] hotelLocation]]];
     
+    [[cell labelThree] setText:[[[NSString alloc]initWithFormat:@"Rating: %hd",[[[[HotelService shared] allHotels] objectAtIndex:indexPath.row] stars]] stringByAppendingString:@" Stars"]];
     return cell;
 }
 
 
 #pragma mark UITableViewDataDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"Selected row: %li", (long)indexPath.row);
     
     RoomsViewControlla *roomsViewControlla = [[RoomsViewControlla alloc] init];
     
-    [roomsViewControlla setAllRooms: [[self.allHotels[indexPath.row] rooms] allObjects]];
-    
+//    [roomsViewControlla setAllRooms: [[[[HotelService shared] allHotels][indexPath.row] rooms] allObjects]];
+    roomsViewControlla.hotel = [[HotelService shared] allHotels][indexPath.row];
     [[self navigationController] pushViewController:roomsViewControlla animated:YES];
 }
 
@@ -91,9 +78,12 @@
     
     [AutoLayout fullScreenConstraintsWithVFL:self.tableView];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CustomCell class] forCellReuseIdentifier:@"cell"];
+
     
-    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.tableView setEstimatedRowHeight:50.0];
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

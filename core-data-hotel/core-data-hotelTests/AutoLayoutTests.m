@@ -11,6 +11,7 @@
 #import "ViewControlla.h"
 
 
+
 @interface AutoLayoutTests : XCTestCase
 
 @property(strong, nonatomic) UIViewController *testController;
@@ -22,6 +23,8 @@
 @property(strong, nonatomic) ViewControlla *viewControllaTest;
 
 @property(strong, nonatomic) NSString *buttonTestString;
+
+
 
 
 @end
@@ -41,6 +44,8 @@
     
     self.buttonTestString = nil;
     self.viewControllaTest = [[ViewControlla alloc]init];
+
+
 }
 
 - (void)tearDown {
@@ -50,6 +55,7 @@
     self.testView2 = nil;
     self.buttonTestString = nil;
     self.viewControllaTest = nil;
+    
     [super tearDown];
 }
 
@@ -98,7 +104,6 @@
     
 }
 
-//Unit Test 3
 
 
 

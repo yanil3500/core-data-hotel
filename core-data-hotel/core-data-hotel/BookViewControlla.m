@@ -11,14 +11,9 @@
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
 
-#import "Guest+CoreDataClass.h"
-#import "Guest+CoreDataProperties.h"
-
-#import "Reservation+CoreDataClass.h"
-#import "Reservation+CoreDataProperties.h"
-
 #import "AutoLayout.h"
-#import "AppDelegate.h"
+
+#import "HotelService.h"
 @interface BookViewControlla () <UITextFieldDelegate>
 
 @property(strong, nonatomic)Room* selectedRoom;
@@ -36,7 +31,7 @@
 }
 
 - (void)viewDidLoad {
-    NSLog(@"Inside of BookViewControlla");
+
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -56,25 +51,19 @@
 
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    NSLog(@"textFieldShouldBeginEditing");
-    //255, 232, 233
+
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSLog(@"textFieldDidEndEditing");
-    NSLog(@"Text So Far: %@",textField.text);
     if (![[textField text] isEqualToString:@""]) {
         [[[self navigationItem] rightBarButtonItem] setEnabled:"YES"];
         
     }
-    
-    NSLog(@"Inside of textFieldDidEndEditing");
     [[[self navigationItem] rightBarButtonItem] setEnabled:"NO"];
     
     
 }
-
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
 
@@ -82,40 +71,6 @@
     return YES;
 }
 #pragma mark helper methods
-
--(void)makeGuest{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    Guest *guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext: [appDelegate.persistentContainer viewContext]];
-    guest.firstName = self.firstName.text;
-    guest.lastName = self.lastName.text;
-    guest.email = self.email.text;
-    
-    Reservation *reservation = [NSEntityDescription insertNewObjectForEntityForName:@"Reservation" inManagedObjectContext: [appDelegate.persistentContainer viewContext]];
-    reservation.startDate = self.startDate;
-    reservation.endDate = self.endDate;
-    reservation.guest = guest;
-    reservation.room = self.selectedRoom;
-    
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-    NSError *errorFor;
-    NSInteger count = [[[appDelegate persistentContainer]viewContext] countForFetchRequest:request error:&errorFor];
-    
-    NSLog(@"(Inside of BookViewControlla) Number of reservations: %li", (long)count);
-    
-    NSLog(@"Inside of makeGuest: %@, Start Date: %@",[[reservation guest] firstName], [reservation startDate]);
-    NSError *saveError;
-    [appDelegate.persistentContainer.viewContext save:&saveError];
-    
-    if (saveError){
-        NSLog(@"Failed to save to Core Data.");
-    } else {
-        NSLog(@"Successfully saved reservation to Core Data.");
-        [[self navigationController] popToRootViewControllerAnimated:YES];
-    }
-    
-}
-
 
 -(void)setUpDoneButton{
 
@@ -129,8 +84,8 @@
     if ([[[self firstName] text] isEqualToString:@""]) {
         [[self firstName]setPlaceholder:@"Required."];
     } else {
-        NSLog(@"The reservation is being made.");
-        [self makeGuest];
+        [[HotelService shared] makeReservationSelectedRoom:self.selectedRoom WithFirstName:[[self firstName] text] andLastName:[[self lastName] text] withEmail:[[self email] text] startingOn:[self startDate] andEndingOn:[self endDate]];
+        [[self navigationController] popToRootViewControllerAnimated:YES];
     }
 }
 -(void)autoLayoutForTextFields{
